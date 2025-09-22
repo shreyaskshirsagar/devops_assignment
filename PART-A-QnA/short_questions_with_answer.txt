@@ -1,0 +1,42 @@
+1. Kubernetes Basics - What is the difference between a Deployment and a StatefulSet? When would you use each?
+>>>
+Difference between Deployment and StatefulSet
+
+Deployment:
+Used for stateless applications. It manages pods by ensuring the desired number are running
+
+StatefulSet:
+Used for stateful applications that need stable, persistent storage, like databases. Pods get persistent storage and stable hostnames, so they maintain identity across restarts.
+
+When to use:
+
+Use Deployment for web servers, APIs, or any stateless app where pods can be replaced freely.
+
+Use StatefulSet for apps like databases, message queues, or any app that needs to keep data or identity across restarts.
+
+
+2. Helm - How do you override values in a Helm chart during installation or upgrade?
+>>>
+helm install my-release my-chart --set replicaCount=3
+or
+helm upgrade my-release my-chart --set replicaCount=3
+
+
+3. Terraform - What is the purpose of a remote backend (e.g., S3 + DynamoDB) and why is it important?
+Remote backend stores your Terraform state file outside your local machine, like in AWS S3.
+
+DynamoDB is often used for state locking to prevent multiple people running Terraform simultaneously and causing conflicts.
+
+It’s important because it enables team collaboration, state consistency, and prevents state corruption in shared environments.
+
+
+4. Troubleshooting - A pod is stuck in CrashLoopBackOff. What two commands would you run first to find the cause?
+>>>
+kubectl describe pod <pod-name> — to get event logs and understand recent pod lifecycle info and errors.
+kubectl logs <pod-name> [-c <container-name>] — to view the container logs and see what caused the crash.
+
+5. Docker - Name two ways to reduce the size of a Docker image.
+>>
+Use smaller base images like alpine instead of full OS images.
+
+Minimize layers by combining commands and cleaning up temporary files after package installs in the same RUN statement.
